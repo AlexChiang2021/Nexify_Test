@@ -1,0 +1,71 @@
+﻿@model  Nexify_Test.ViewModels.Platform.DataViewModel
+
+@if(string.IsNullOrEmpty(Model.Id))
+{
+    <h1>新紀錄</h1>
+}
+else
+{
+    <h1>編輯記錄</h1>
+}
+<!--輸入區-->
+@using (Html.BeginForm(new { enctype = "multipart/form-data", id = "input_area"}))
+{
+    @Html.AntiForgeryToken()
+        <!--必填提醒-->
+    <div>
+        <div>
+            @Html.HiddenFor(m => m.Id)
+            <label style="width:70px; display:inline-block">＊名字：</label>
+            <div style="display:inline;">
+                @Html.TextBoxFor(m => m.Name, new { @maxlength = "30", placeholder = "必填" })
+                @Html.ValidationMessageFor(m => m.Name, "")
+            </div>
+        </div>
+        <div>
+            <label style="width:70px; display:inline-block">出生日期：</label>
+            <div style="display:inline;">
+                @Html.TextBoxFor(m => m.DateOfBirth, new { id = "DateOfBirth", placeholder = "MM/dd/yyyy" })
+                @Html.ValidationMessageFor(m => m.DateOfBirth, "")
+            </div>
+        </div>
+        <div>
+            <label style="width:70px; display:inline-block">工資：</label>
+            <div style="display:inline;">
+                @Html.TextBoxFor(m => m.Salary, new { id = "Salary", placeholder = "0~100000" })
+                @Html.ValidationMessageFor(m => m.Salary, "")
+            </div>
+        </div>
+        <div>
+            <label style="width:70px; display:inline-block">住址：</label>
+            <div style="display:inline;">
+                @Html.TextBoxFor(m => m.Address, new { id = "Address", placeholder = "" })
+                @Html.ValidationMessageFor(m => m.Address, "")
+            </div>
+        </div>
+    </div>
+
+    <!--按鈕區-->
+    <div>
+        <div>
+            <button type="button" id="btnSave">儲存</button>
+            <button type="button" onclick="history.go(-1);">取消</button>
+        </div>
+    </div>
+}
+
+@section BodyBottom{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+@Scripts.Render("~/Scripts/jquery.validate.js")
+@Scripts.Render("~/Scripts/Platform/Data.js")
+    <script type="text/javascript">
+        $(function () {
+            g_Data.Init();
+        });
+
+    </script>
+}
+
+
+
+

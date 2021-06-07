@@ -1,0 +1,37 @@
+﻿@model  List<Nexify_Test.ViewModels.Platform.DataViewModel>
+
+<div>
+    <table style="width:500px;">
+        <thead>
+            <tr>
+                <th scope="col">名字</th>
+                <th scope="col">出生日期</th>
+                <th scope="col">工資</th>
+                <th scope="col">住址</th>
+                <th scope="col">功能</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (Nexify_Test.ViewModels.Platform.DataViewModel item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td style="text-align:center">@item.DateOfBirth</td>
+                        <td style="text-align:right">@item.Salary</td>
+                        <td>@item.Address</td>
+                        <td style="text-align:center">
+                            <button type="button" onclick="g_DataList.EditData('@item.Id');">編輯</button>
+                            <button type="button" onclick="g_DataList.DelData('@item.Id');">刪除</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="9">查無資料</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

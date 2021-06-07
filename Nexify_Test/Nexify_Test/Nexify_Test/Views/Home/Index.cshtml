@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Nexify_Test";
+}
+<!--form-->
+<form id="fmQuery">
+    <!--輸入區-->
+    <div>
+        <div>
+            <div style="display:inline;"><input name="strName" style="max-width:120px" placeholder="名字"></div>
+            <button id="btnQuery" type="button" >查詢/更新</button>
+            <button type="button" onclick="location.href = '/Home/SaveDataList'">新增</button>
+        </div>
+    </div>
+
+    <!--資料區-->
+    <div id="divDataList"></div>
+
+    @*分頁區*@
+    <div id="divPagingList">
+        @{Html.RenderPartial("~/Views/Shared/_PagingList.cshtml");}
+    </div>
+</form>
+
+@section BodyBottom{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @Scripts.Render("~/Scripts/Platform/Paging.js")
+    @Scripts.Render("~/Scripts/Platform/DataList.js")
+    <script type="text/javascript">
+        $(function () {
+            g_DataList.Init();
+        });
+
+    </script>
+}

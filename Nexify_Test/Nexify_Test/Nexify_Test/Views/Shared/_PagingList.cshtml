@@ -1,0 +1,34 @@
+﻿@{
+    int intTotalCount = ViewBag.TotalCount == null ? 0 : ViewBag.TotalCount;
+}
+
+
+<div style="display:inline;">
+    <select id="sltPageSize" name="PageSize">
+        <option value="5">每頁5筆</option>
+        <option value="10" selected>每頁10筆</option>
+        <option value="30">每頁30筆</option>
+        <option value="50">每頁50筆</option>
+        <option value="100">每頁100筆</option>
+    </select>
+</div>
+
+<div style="display:inline;">
+    <select id="sltPageIndex" name="PageIndex">
+        @if (@ViewBag.PageCount > 0)
+        {
+            for (int i = 1; i <= @ViewBag.PageCount; i++)
+            {
+                <option value="@i">第 @i 頁</option>
+            }
+        }
+        else
+        {
+            <option value="1">第 1 頁</option>
+        }
+    </select>
+</div>
+
+<div style="display:inline;">
+    <label>總筆數 <span id="spanTotalCount">@intTotalCount</span> 筆</label>
+</div>
