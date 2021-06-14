@@ -70,7 +70,7 @@ namespace Nexify_Test.Controllers
         [HttpGet]
         public ActionResult SaveDataList(string Id)
         {
-            RServiceProvider rsp = new RServiceProvider();
+            RServiceProvider rsp = null;
             DataViewModel vmData = new DataViewModel();
             if (!string.IsNullOrEmpty(Id))
             {
@@ -78,7 +78,7 @@ namespace Nexify_Test.Controllers
                 rsp = moPlatform.GetDataList(Id, string.Empty);
             }
 
-            if (rsp.Result)
+            if (rsp != null && rsp.Result)
             {
                 vmData = (rsp.ReturnData as List<DataViewModel>)[0] as DataViewModel;
                 return View(vmData);
@@ -93,9 +93,8 @@ namespace Nexify_Test.Controllers
         [HttpPost]
         public ActionResult SaveDataList(DataViewModel p_vmData)
         {
-            RServiceProvider rsp = new RServiceProvider();
             PlatformModel moPlatform = new PlatformModel();
-            rsp = moPlatform.SaveData(p_vmData);
+            RServiceProvider rsp = moPlatform.SaveData(p_vmData);
             return Content(new JsonSerializer().Serialize(rsp), "application/json");
         }
 
